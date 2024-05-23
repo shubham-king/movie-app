@@ -1,4 +1,5 @@
 # movie-app
+
 A simple ReactTS movies app based on OMDb API
 
 Made with ❤️ to programming
@@ -8,6 +9,7 @@ Made with ❤️ to programming
 </p>
 
 💻 Tech used:
+
 - React
 - Typescript
 - Vite
@@ -27,4 +29,3 @@ Made with ❤️ to programming
 - Node.js and pnpm
 
 🌎 Live demo: ...
-
