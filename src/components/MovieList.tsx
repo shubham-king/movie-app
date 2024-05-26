@@ -2,7 +2,7 @@ import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
 
 const MovieList = () => {
-  const { data, isLoading, error } = useFetch("&s=friends");
+  const { data, isLoading, error } = useFetch("&s=twilight");
 
   if (isLoading) return <div>Loading...</div>;
   if (error.show) return <div>Error: {error.msg}</div>;
@@ -15,7 +15,7 @@ const MovieList = () => {
             key={index}
             className="flex flex-col justify-between items-center p-6 "
           >
-            <Link to={`/${movie.imdbID}`}>
+            <Link to={`/movie/${movie.imdbID}`}>
               <img
                 className="rounded-lg glow-wrapper"
                 src={movie.Poster}

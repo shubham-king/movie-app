@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/:movieId" element={<MovieDetails />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
       </Routes>
     </BrowserRouter>
   );
