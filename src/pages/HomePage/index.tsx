@@ -19,20 +19,23 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MovieList from "@/components/MovieList";
 import SearchBar from "@/components/SearchBar";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useAppContext } from "@/context/AppContext";
+import useFetch from "@/hooks/useFetch";
 
 export function HomePage() {
-  const [query, setQuery] = useState(() => {
-    return localStorage.getItem("lastSearch") || "friends";
-  });
-
-  useEffect(() => {
-    localStorage.setItem("lastSearch", query);
-  }, [query]);
+  const { state, dispatch } = useAppContext();
+  const { query } = state;
 
   const handleSearch = (searchQuery: string) => {
-    setQuery(searchQuery);
+    dispatch({ type: "SET_QUERY", payload: searchQuery });
   };
+
+  useFetch(`&s=${query}`);
+
+  useEffect(() => {
+    dispatch({ type: "SET_QUERY", payload: query });
+  }, [dispatch, query]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -75,7 +78,7 @@ export function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <MovieList query={query} />
+                  <MovieList />
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
@@ -93,9 +96,7 @@ export function HomePage() {
                     Browse a list of our movies.
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  Movie list here...
-                </CardContent>
+                <CardContent>Movie list here...</CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
                     Showing <strong>1-10</strong> of <strong>32</strong>{" "}

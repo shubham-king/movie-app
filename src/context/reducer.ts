@@ -4,6 +4,7 @@ export const initialState: State<MovieType[]> = {
   isLoading: false,
   error: { show: false, msg: "" },
   data: null,
+  query: localStorage.getItem("lastSearch") || "friends",
 };
 
 const reducer = (
@@ -25,6 +26,12 @@ const reducer = (
         ...state,
         isLoading: false,
         error: { show: true, msg: action.payload },
+      };
+    case "SET_QUERY":
+      localStorage.setItem("lastSearch", action.payload as string);
+      return {
+        ...state,
+        query: action.payload as string,
       };
     default:
       return state;

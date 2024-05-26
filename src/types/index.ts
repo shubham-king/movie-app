@@ -23,11 +23,13 @@ export interface ErrorState {
 
 export interface State<T> {
   isLoading: boolean;
-  error: ErrorState;
+  error: { show: boolean; msg: string };
   data: T | null;
+  query: string;
 }
 
 export type Action<T> =
   | { type: "SET_LOADING" }
   | { type: "SET_DATA"; payload: T }
-  | { type: "SET_ERROR"; payload: string };
+  | { type: "SET_ERROR"; payload: string }
+  | { type: "SET_QUERY"; payload: string };
