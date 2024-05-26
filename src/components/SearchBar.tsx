@@ -4,7 +4,7 @@ const SeachBar = () => {
       <input type="text" />
       <input type="submit" />
     </form>
-  )
-}
+  );
+};
 
-export default SeachBar
+export default SeachBar;

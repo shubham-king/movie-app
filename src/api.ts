@@ -5,13 +5,13 @@ export const fetchMovies = async (urlParams: string) => {
     const response = await fetch(`${API_ENDPOINT}${urlParams}`);
     const data = await response.json();
 
-    if (!response.ok || data.Response !== 'True') {
-      throw new Error(data.Error || 'Failed to fetch movies');
+    if (!response.ok || data.Response !== "True") {
+      throw new Error(data.Error || "Failed to fetch movies");
     }
 
     return data.Search;
   } catch (error) {
-    throw new Error((error as Error).message || 'Failed to fetch movies');
+    throw new Error((error as Error).message || "Failed to fetch movies");
   }
 };
 
@@ -20,12 +20,14 @@ export const fetchMovieDetails = async (id: string) => {
     const response = await fetch(`${API_ENDPOINT}&i=${id}`);
     const data = await response.json();
 
-    if (!response.ok || data.Response !== 'True') {
-      throw new Error(data.Error || 'Failed to fetch movie details');
+    if (!response.ok || data.Response !== "True") {
+      throw new Error(data.Error || "Failed to fetch movie details");
     }
 
     return data;
   } catch (error) {
-    throw new Error((error as Error).message || 'Failed to fetch movie details');
+    throw new Error(
+      (error as Error).message || "Failed to fetch movie details"
+    );
   }
 };

@@ -1,6 +1,12 @@
-import { createContext, useReducer, ReactNode, useContext, Dispatch } from 'react';
-import reducer, { initialState } from './reducer';
-import { State, Action, MovieType } from '../types';
+import {
+  createContext,
+  useReducer,
+  ReactNode,
+  useContext,
+  Dispatch,
+} from "react";
+import reducer, { initialState } from "./reducer";
+import { State, Action, MovieType } from "../types";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -26,7 +32,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 const useAppContext = () => {
   const context = useContext(AppContext);
   if (!context) {
-    throw new Error('useAppContext must be used within an AppProvider');
+    throw new Error("useAppContext must be used within an AppProvider");
   }
   return context;
 };

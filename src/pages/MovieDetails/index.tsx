@@ -11,7 +11,7 @@ import {
   CollapsibleContent,
   Collapsible,
 } from "@/components/ui/collapsible";
-import placeholderImage from "@/assets/placeholder.svg"
+import placeholderImage from "@/assets/placeholder.svg";
 
 const MovieDetails = () => {
   return (
