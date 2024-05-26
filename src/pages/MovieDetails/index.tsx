@@ -1,17 +1,6 @@
 import { useParams } from "react-router-dom";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  CollapsibleTrigger,
-  CollapsibleContent,
-  Collapsible,
-} from "@/components/ui/collapsible";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";
 import useFetch from "@/hooks/useFetch";
 import { MovieType } from "@/types";

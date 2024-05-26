@@ -1,11 +1,16 @@
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
+import placeholderImage from "@/assets/placeholder.svg";
 
-const MovieList = () => {
-  const { data, isLoading, error } = useFetch("&s=twilight");
+interface MovieListProps {
+  query: string;
+}
+
+const MovieList = ({ query }: MovieListProps) => {
+  const { data, isLoading, error } = useFetch(`&s=${query}`);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error.show) return <div>Error: {error.msg}</div>;
+  if (error.show) return <div>{error.msg}</div>;
 
   return (
     <div className="grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
@@ -18,7 +23,7 @@ const MovieList = () => {
             <Link to={`/movie/${movie.imdbID}`}>
               <img
                 className="rounded-lg glow-wrapper"
-                src={movie.Poster}
+                src={movie.Poster !== "N/A" ? movie.Poster : placeholderImage}
                 width={300}
                 height={500}
                 alt="poster"

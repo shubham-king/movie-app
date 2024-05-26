@@ -1,4 +1,4 @@
-import { ListFilter, Search } from "lucide-react";
+import { ListFilter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,25 +16,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MovieList from "@/components/MovieList";
+import SearchBar from "@/components/SearchBar";
+import { useState, useEffect } from "react";
 
 export function HomePage() {
+  const [query, setQuery] = useState(() => {
+    return localStorage.getItem("lastSearch") || "friends";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("lastSearch", query);
+  }, [query]);
+
+  const handleSearch = (searchQuery: string) => {
+    setQuery(searchQuery);
+  };
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <Tabs defaultValue="galery">
             <div className="flex items-center">
-              <div className="relative flex-1 md:grow-0 pr-2">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Friends..."
-                  className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-                />
-              </div>
+              <SearchBar onSearch={handleSearch} defaultValue={query} />
 
               <div className="ml-auto flex items-center gap-2">
                 <TabsList className="hidden sm:flex">
@@ -60,23 +66,6 @@ export function HomePage() {
                 </DropdownMenu>
               </div>
             </div>
-            <TabsContent value="list">
-              <Card x-chunk="dashboard-06-chunk-0">
-                <CardHeader>
-                  <CardTitle>Movies List</CardTitle>
-                  <CardDescription>
-                    Browse a list of our movies.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>ddd</CardContent>
-                <CardFooter>
-                  <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                    products
-                  </div>
-                </CardFooter>
-              </Card>
-            </TabsContent>
             <TabsContent value="galery">
               <Card x-chunk="dashboard-06-chunk-0">
                 <CardHeader>
@@ -86,7 +75,26 @@ export function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <MovieList />
+                  <MovieList query={query} />
+                </CardContent>
+                <CardFooter>
+                  <div className="text-xs text-muted-foreground">
+                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
+                    products
+                  </div>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+            <TabsContent value="list">
+              <Card x-chunk="dashboard-06-chunk-0">
+                <CardHeader>
+                  <CardTitle>Movies List</CardTitle>
+                  <CardDescription>
+                    Browse a list of our movies.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  Movie list here...
                 </CardContent>
                 <CardFooter>
                   <div className="text-xs text-muted-foreground">
