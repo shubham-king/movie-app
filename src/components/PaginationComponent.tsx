@@ -17,7 +17,7 @@ const PaginationComponent = () => {
     dispatch({ type: "SET_PAGE", payload: page });
   };
 
-  const maxPagesView = 5;
+  const maxPagesView = 3;
   const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
   const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
 
