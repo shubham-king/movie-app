@@ -1,10 +1,12 @@
-import { State, Action, MovieType } from "../types";
+import { State, Action, MovieType, MovieData } from "../types";
 
 export const initialState: State<MovieType[]> = {
   isLoading: false,
   error: { show: false, msg: "" },
   data: null,
   query: localStorage.getItem("lastSearch") || "friends",
+  currentPage: Number(localStorage.getItem("currentPage")) || 1,
+  totalPages: 1,
 };
 
 const reducer = (
@@ -18,7 +20,8 @@ const reducer = (
       return {
         ...state,
         isLoading: false,
-        data: action.payload,
+        data: action.payload.data,
+        totalPages: Math.ceil(action.payload.totalResults / action.payload.resultsPerPage),
         error: { show: false, msg: "" },
       };
     case "SET_ERROR":
@@ -32,6 +35,21 @@ const reducer = (
       return {
         ...state,
         query: action.payload as string,
+        currentPage: 1,
+      };
+    case "SET_PAGE":
+      localStorage.setItem("currentPage", action.payload as string);
+      return {
+        ...state,
+        currentPage: action.payload as number,
+      };
+    case "SET_LOCAL_DATA":
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload.data,
+        totalPages: Math.ceil(action.payload.totalResults / action.payload.resultsPerPage),
+        error: { show: false, msg: "" },
       };
     default:
       return state;

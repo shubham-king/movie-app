@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";
 import useFetch from "@/hooks/useFetch";
@@ -7,7 +8,12 @@ import { MovieType } from "@/types";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { isLoading, error, data } = useFetch(id || "", true);
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -27,6 +33,9 @@ const MovieDetails = () => {
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+          <div>
+          <Button onClick={handleBackClick}>Back</Button>
+          </div>
           <Card x-chunk="dashboard-06-chunk-0">
             <CardContent>
               <div>

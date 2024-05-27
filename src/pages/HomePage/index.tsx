@@ -22,13 +22,18 @@ import SearchBar from "@/components/SearchBar";
 import { useEffect } from "react";
 import { useAppContext } from "@/context/AppContext";
 import useFetch from "@/hooks/useFetch";
+import PaginationComponent from "@/components/PaginationComponent";
 
 export function HomePage() {
   const { state, dispatch } = useAppContext();
-  const { query } = state;
+  const { query, currentPage, totalPages } = state;
 
   const handleSearch = (searchQuery: string) => {
     dispatch({ type: "SET_QUERY", payload: searchQuery });
+  };
+
+  const handlePageChange = (page: number) => {
+    dispatch({ type: "SET_PAGE", payload: page });
   };
 
   useFetch(`&s=${query}`);
@@ -44,29 +49,11 @@ export function HomePage() {
           <Tabs defaultValue="galery">
             <div className="flex items-center">
               <SearchBar onSearch={handleSearch} defaultValue={query} />
-
               <div className="ml-auto flex items-center gap-2">
                 <TabsList className="hidden sm:flex">
                   <TabsTrigger value="galery">Galery</TabsTrigger>
                   <TabsTrigger value="list">List</TabsTrigger>
                 </TabsList>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="h-8 gap-1">
-                      <ListFilter className="h-3.5 w-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        Filter
-                      </span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Filter by</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuCheckboxItem checked>
-                      Year
-                    </DropdownMenuCheckboxItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
               </div>
             </div>
             <TabsContent value="galery">
@@ -81,10 +68,7 @@ export function HomePage() {
                   <MovieList />
                 </CardContent>
                 <CardFooter>
-                  <div className="text-xs text-muted-foreground">
-                    Showing <strong>1-10</strong> of <strong>32</strong>{" "}
-                    products
-                  </div>
+                  <PaginationComponent />
                 </CardFooter>
               </Card>
             </TabsContent>

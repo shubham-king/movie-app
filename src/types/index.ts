@@ -23,13 +23,23 @@ export interface ErrorState {
 
 export interface State<T> {
   isLoading: boolean;
-  error: { show: boolean; msg: string };
+  error: ErrorState;
   data: T | null;
   query: string;
+  currentPage: number;
+  totalPages: number;
+}
+
+export interface MovieData {
+  data: MovieType[];
+  totalResults: number;
+  resultsPerPage: number;
 }
 
 export type Action<T> =
   | { type: "SET_LOADING" }
-  | { type: "SET_DATA"; payload: T }
+  | { type: "SET_DATA"; payload: MovieData }
   | { type: "SET_ERROR"; payload: string }
-  | { type: "SET_QUERY"; payload: string };
+  | { type: "SET_QUERY"; payload: string }
+  | { type: "SET_PAGE"; payload: number }
+  | { type: "SET_LOCAL_DATA"; payload: MovieData };
