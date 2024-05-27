@@ -1,6 +1,10 @@
 const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APP_MOVIE_API_KEY}`;
 
-export const fetchMovies = async (searchQuery: string, page: number, resultsPerPage: number) => {
+export const fetchMovies = async (
+  searchQuery: string,
+  page: number,
+  resultsPerPage: number
+) => {
   const cacheKey = `movies_${searchQuery}_page${page}`;
   const cachedData = localStorage.getItem(cacheKey);
 
@@ -9,7 +13,9 @@ export const fetchMovies = async (searchQuery: string, page: number, resultsPerP
   }
 
   try {
-    const response = await fetch(`${API_ENDPOINT}&s=${searchQuery}&page=${page}`);
+    const response = await fetch(
+      `${API_ENDPOINT}&s=${searchQuery}&page=${page}`
+    );
     const data = await response.json();
 
     if (!response.ok || data.Response !== "True") {
@@ -17,7 +23,10 @@ export const fetchMovies = async (searchQuery: string, page: number, resultsPerP
     }
 
     const movies = data.Search.slice(0, resultsPerPage);
-    localStorage.setItem(cacheKey, JSON.stringify({ data: movies, totalResults: data.totalResults }));
+    localStorage.setItem(
+      cacheKey,
+      JSON.stringify({ data: movies, totalResults: data.totalResults })
+    );
     return { data: movies, totalResults: data.totalResults };
   } catch (error) {
     throw new Error((error as Error).message || "Failed to fetch movies");

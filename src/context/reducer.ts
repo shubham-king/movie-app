@@ -21,7 +21,9 @@ const reducer = (
         ...state,
         isLoading: false,
         data: action.payload.data,
-        totalPages: Math.ceil(action.payload.totalResults / action.payload.resultsPerPage),
+        totalPages: Math.ceil(
+          action.payload.totalResults / action.payload.resultsPerPage
+        ),
         error: { show: false, msg: "" },
       };
     case "SET_ERROR":
@@ -48,7 +50,9 @@ const reducer = (
         ...state,
         isLoading: false,
         data: action.payload.data,
-        totalPages: Math.ceil(action.payload.totalResults / action.payload.resultsPerPage),
+        totalPages: Math.ceil(
+          action.payload.totalResults / action.payload.resultsPerPage
+        ),
         error: { show: false, msg: "" },
       };
     default:

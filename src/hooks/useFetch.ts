@@ -10,7 +10,9 @@ const useFetch = (urlParams: string, isDetails: boolean = false) => {
   const fetchData = useCallback(async () => {
     dispatch({ type: "SET_LOADING" });
 
-    const cacheKey = isDetails ? `movie_${urlParams}` : `movies_${query}_page${currentPage}`;
+    const cacheKey = isDetails
+      ? `movie_${urlParams}`
+      : `movies_${query}_page${currentPage}`;
     const cachedData = localStorage.getItem(cacheKey);
 
     if (cachedData) {
@@ -26,11 +28,14 @@ const useFetch = (urlParams: string, isDetails: boolean = false) => {
         ? await fetchMovieDetails(urlParams)
         : await fetchMovies(query, currentPage, 10);
 
-      localStorage.setItem(cacheKey, JSON.stringify({
-        data: isDetails ? [data] : data.data,
-        totalResults: data.totalResults,
-        resultsPerPage: 10,
-      }));
+      localStorage.setItem(
+        cacheKey,
+        JSON.stringify({
+          data: isDetails ? [data] : data.data,
+          totalResults: data.totalResults,
+          resultsPerPage: 10,
+        })
+      );
 
       dispatch({
         type: "SET_DATA",
