@@ -1,4 +1,4 @@
-import { State, Action, MovieType, MovieData } from "../types";
+import { State, Action, MovieType } from "../types";
 
 export const initialState: State<MovieType[]> = {
   isLoading: false,
@@ -9,10 +9,7 @@ export const initialState: State<MovieType[]> = {
   totalPages: 1,
 };
 
-const reducer = (
-  state: State<MovieType[]>,
-  action: Action<MovieType[]>
-): State<MovieType[]> => {
+const reducer = (state: State<MovieType[]>, action: Action): State<MovieType[]> => {
   switch (action.type) {
     case "SET_LOADING":
       return { ...state, isLoading: true, error: { show: false, msg: "" } };
@@ -33,17 +30,17 @@ const reducer = (
         error: { show: true, msg: action.payload },
       };
     case "SET_QUERY":
-      localStorage.setItem("lastSearch", action.payload as string);
+      localStorage.setItem("lastSearch", action.payload);
       return {
         ...state,
-        query: action.payload as string,
+        query: action.payload,
         currentPage: 1,
       };
     case "SET_PAGE":
-      localStorage.setItem("currentPage", action.payload as string);
+      localStorage.setItem("currentPage", action.payload.toString());
       return {
         ...state,
-        currentPage: action.payload as number,
+        currentPage: action.payload,
       };
     case "SET_LOCAL_DATA":
       return {

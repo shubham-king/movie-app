@@ -36,7 +36,7 @@ export interface MovieData {
   resultsPerPage: number;
 }
 
-export type Action<T> =
+export type Action =
   | { type: "SET_LOADING" }
   | { type: "SET_DATA"; payload: MovieData }
   | { type: "SET_ERROR"; payload: string }

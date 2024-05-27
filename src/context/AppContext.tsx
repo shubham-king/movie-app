@@ -14,7 +14,7 @@ interface AppProviderProps {
 
 interface AppContextType {
   state: State<MovieType[]>;
-  dispatch: Dispatch<Action<MovieType[]>>;
+  dispatch: Dispatch<Action>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
