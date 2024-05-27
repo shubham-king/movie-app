@@ -12,12 +12,12 @@ const MovieList = () => {
   if (error.show) return <div>{error.msg}</div>;
 
   return (
-    <div className="grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 movie-list ">
       {data &&
         data.map((movie, index) => (
           <div
             key={index}
-            className="flex flex-col justify-between items-center p-6 "
+            className="flex flex-col justify-between items-center p-6 movie-item"
           >
             <Link to={`/movie/${movie.imdbID}`}>
               <img
