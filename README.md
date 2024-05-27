@@ -28,4 +28,4 @@ Made with ❤️ to programming
 
 - Node.js and pnpm
 
-🌎 Live demo: ...
+🌎 Live demo: [Movie App](https://movie-app-omdb-lz.netlify.app/)
