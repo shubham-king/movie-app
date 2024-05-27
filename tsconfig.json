@@ -31,7 +31,7 @@
     "src/**/*.tsx",
     "tailwind.config.ts",
     "vite.config.ts"
-  ],
+, "tests/basic.spec.ts"  ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
