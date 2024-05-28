@@ -3,14 +3,12 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";
-import useFetch from "@/hooks/useFetch";
 import { MovieType } from "@/types";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { isLoading, error, data } = useFetch(id || "", true);
 
   const handleBackClick = () => {
     navigate(-1);

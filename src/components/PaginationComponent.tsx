@@ -10,11 +10,8 @@ import {
 } from "@/components/ui/pagination";
 
 const PaginationComponent = () => {
-  const { state, dispatch } = useAppContext();
-  const { currentPage, totalPages } = state;
 
   const handlePageChange = (page: number) => {
-    dispatch({ type: "SET_PAGE", payload: page });
   };
 
   const maxPagesView = 3;

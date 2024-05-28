@@ -9,25 +9,13 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MovieList from "@/components/MovieList";
 import SearchBar from "@/components/SearchBar";
-import { useEffect } from "react";
-import { useAppContext } from "@/context/AppContext";
-import useFetch from "@/hooks/useFetch";
 import PaginationComponent from "@/components/PaginationComponent";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function HomePage() {
-  const { state, dispatch } = useAppContext();
-  const { query, isLoading } = state;
 
   const handleSearch = (searchQuery: string) => {
-    dispatch({ type: "SET_QUERY", payload: searchQuery });
   };
-
-  useFetch(`&s=${query}`);
-
-  useEffect(() => {
-    dispatch({ type: "SET_QUERY", payload: query });
-  }, [dispatch, query]);
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">

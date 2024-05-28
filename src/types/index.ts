@@ -36,10 +36,3 @@ export interface MovieData {
   resultsPerPage: number;
 }
 
-export type Action =
-  | { type: "SET_LOADING" }
-  | { type: "SET_DATA"; payload: MovieData }
-  | { type: "SET_ERROR"; payload: string }
-  | { type: "SET_QUERY"; payload: string }
-  | { type: "SET_PAGE"; payload: number }
-  | { type: "SET_LOCAL_DATA"; payload: MovieData };

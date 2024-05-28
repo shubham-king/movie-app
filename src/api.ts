@@ -5,12 +5,6 @@ export const fetchMovies = async (
   page: number,
   resultsPerPage: number
 ) => {
-  const cacheKey = `movies_${searchQuery}_page${page}`;
-  const cachedData = localStorage.getItem(cacheKey);
-
-  if (cachedData) {
-    return JSON.parse(cachedData);
-  }
 
   try {
     const response = await fetch(
@@ -23,10 +17,7 @@ export const fetchMovies = async (
     }
 
     const movies = data.Search.slice(0, resultsPerPage);
-    localStorage.setItem(
-      cacheKey,
-      JSON.stringify({ data: movies, totalResults: data.totalResults })
-    );
+    
     return { data: movies, totalResults: data.totalResults };
   } catch (error) {
     throw new Error((error as Error).message || "Failed to fetch movies");
@@ -34,12 +25,6 @@ export const fetchMovies = async (
 };
 
 export const fetchMovieDetails = async (id: string) => {
-  const cacheKey = `movie_${id}`;
-  const cachedData = localStorage.getItem(cacheKey);
-
-  if (cachedData) {
-    return JSON.parse(cachedData);
-  }
 
   try {
     const response = await fetch(`${API_ENDPOINT}&i=${id}`);
@@ -49,7 +34,6 @@ export const fetchMovieDetails = async (id: string) => {
       throw new Error(data.Error || "Failed to fetch movie details");
     }
 
-    localStorage.setItem(cacheKey, JSON.stringify(data));
     return data;
   } catch (error) {
     throw new Error(

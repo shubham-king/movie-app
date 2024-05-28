@@ -1,12 +1,7 @@
 import { Link } from "react-router-dom";
 import placeholderImage from "@/assets/placeholder.svg";
-import { useAppContext } from "@/context/AppContext";
-import useFetch from "../hooks/useFetch";
 
 const MovieList = () => {
-  const { state } = useAppContext();
-  const { query } = state;
-  const { data, isLoading, error } = useFetch(`&s=${query}`);
 
   if (isLoading) return <div>Loading...</div>;
   if (error.show) return <div>{error.msg}</div>;
