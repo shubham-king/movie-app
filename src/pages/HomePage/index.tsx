@@ -16,11 +16,18 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function HomePage() {
   const [query, setQuery] = useState("Batman");
-  const { data, error, isLoading } = useMovies(query, 1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, error, isLoading } = useMovies(query, currentPage);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
   };
+
+  const totalPages = data?.totalResults ? Math.ceil(data.totalResults / 10) : 0;
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -53,7 +60,11 @@ export function HomePage() {
                   )}
                 </CardContent>
                 <CardFooter>
-                  <PaginationComponent />
+                  <PaginationComponent
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </CardFooter>
               </Card>
             </TabsContent>

@@ -8,22 +8,24 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-const PaginationComponent = () => {
-  const handlePageChange = (page: number) => {};
-
-  const maxPagesView = 3;
-  // const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
-  // const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
+const PaginationComponent: React.FC<PaginationComponentProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
+  const maxPagesView = 5;
+  const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
+  const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
 
   return (
     <Pagination>
-      {/* <PaginationContent>
+      <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage > 1) handlePageChange(currentPage - 1);
+              if (currentPage > 1) onPageChange(currentPage - 1);
             }}
             className={
               currentPage === 1 ? "pointer-events-none opacity-50" : ""
@@ -37,7 +39,7 @@ const PaginationComponent = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePageChange(1);
+                  onPageChange(1);
                 }}
               >
                 1
@@ -56,7 +58,7 @@ const PaginationComponent = () => {
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                handlePageChange(startPage + index);
+                onPageChange(startPage + index);
               }}
               isActive={currentPage === startPage + index}
             >
@@ -76,7 +78,7 @@ const PaginationComponent = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePageChange(totalPages);
+                  onPageChange(totalPages);
                 }}
               >
                 {totalPages}
@@ -89,14 +91,14 @@ const PaginationComponent = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage < totalPages) handlePageChange(currentPage + 1);
+              if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
             className={
               currentPage === totalPages ? "pointer-events-none opacity-50" : ""
             }
           />
         </PaginationItem>
-      </PaginationContent> */}
+      </PaginationContent>
     </Pagination>
   );
 };

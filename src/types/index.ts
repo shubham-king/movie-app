@@ -15,3 +15,17 @@ export type MovieType = {
   Awards?: string;
   BoxOffice?: string;
 };
+export interface SearchBarProps {
+  onSearch: (query: string) => void;
+  defaultValue: string;
+}
+
+export interface MovieListProps {
+  data: MovieType[];
+}
+
+export interface PaginationComponentProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
