@@ -15,31 +15,17 @@ export type MovieType = {
   Awards?: string;
   BoxOffice?: string;
 };
-
-export interface ErrorState {
-  show: boolean;
-  msg: string;
+export interface SearchBarProps {
+  onSearch: (query: string) => void;
+  defaultValue: string;
 }
 
-export interface State<T> {
-  isLoading: boolean;
-  error: ErrorState;
-  data: T | null;
-  query: string;
+export interface MovieListProps {
+  data: MovieType[];
+}
+
+export interface PaginationComponentProps {
   currentPage: number;
   totalPages: number;
+  onPageChange: (page: number) => void;
 }
-
-export interface MovieData {
-  data: MovieType[];
-  totalResults: number;
-  resultsPerPage: number;
-}
-
-export type Action =
-  | { type: "SET_LOADING" }
-  | { type: "SET_DATA"; payload: MovieData }
-  | { type: "SET_ERROR"; payload: string }
-  | { type: "SET_QUERY"; payload: string }
-  | { type: "SET_PAGE"; payload: number }
-  | { type: "SET_LOCAL_DATA"; payload: MovieData };

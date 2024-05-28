@@ -27,11 +27,12 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "src/**/*",
     "tailwind.config.ts",
-    "vite.config.ts"
-, "tests/basic.spec.ts"  ],
+    "vite.config.ts",
+    "playwright.config.ts",
+    "tests/**/*"
+  ],
   "exclude": ["node_modules", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

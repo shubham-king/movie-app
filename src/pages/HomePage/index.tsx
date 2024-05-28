@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useMovies } from "@/hooks/useMovies";
 import {
   Card,
   CardContent,
@@ -9,25 +11,23 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MovieList from "@/components/MovieList";
 import SearchBar from "@/components/SearchBar";
-import { useEffect } from "react";
-import { useAppContext } from "@/context/AppContext";
-import useFetch from "@/hooks/useFetch";
 import PaginationComponent from "@/components/PaginationComponent";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function HomePage() {
-  const { state, dispatch } = useAppContext();
-  const { query, isLoading } = state;
+  const [query, setQuery] = useState("Batman");
+  const [currentPage, setCurrentPage] = useState(1);
+  const { data, error, isLoading } = useMovies(query, currentPage);
 
-  const handleSearch = (searchQuery: string) => {
-    dispatch({ type: "SET_QUERY", payload: searchQuery });
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  useFetch(`&s=${query}`);
+  const handleSearch = (searchQuery: string) => {
+    setQuery(searchQuery);
+  };
 
-  useEffect(() => {
-    dispatch({ type: "SET_QUERY", payload: query });
-  }, [dispatch, query]);
+  const totalPages = data?.totalResults ? Math.ceil(data.totalResults / 10) : 0;
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -53,10 +53,18 @@ export function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <MovieList />
+                  {error ? (
+                    <div>Error: {error.message}</div>
+                  ) : (
+                    <MovieList data={data?.data} />
+                  )}
                 </CardContent>
                 <CardFooter>
-                  <PaginationComponent />
+                  <PaginationComponent
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
                 </CardFooter>
               </Card>
             </TabsContent>

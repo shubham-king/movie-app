@@ -3,11 +3,7 @@ import { Search } from "lucide-react";
 import { useState, useEffect, ChangeEvent } from "react";
 import debounce from "lodash.debounce";
 import { useRef } from "react";
-
-interface SearchBarProps {
-  onSearch: (query: string) => void;
-  defaultValue: string;
-}
+import { SearchBarProps } from "@/types";
 
 const SearchBar = ({ onSearch, defaultValue }: SearchBarProps) => {
   const [inputValue, setInputValue] = useState(defaultValue);

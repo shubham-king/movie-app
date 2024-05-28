@@ -1,4 +1,3 @@
-import { useAppContext } from "@/context/AppContext";
 import {
   Pagination,
   PaginationContent,
@@ -8,16 +7,14 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import type { PaginationComponentProps } from "@/types";
 
-const PaginationComponent = () => {
-  const { state, dispatch } = useAppContext();
-  const { currentPage, totalPages } = state;
-
-  const handlePageChange = (page: number) => {
-    dispatch({ type: "SET_PAGE", payload: page });
-  };
-
-  const maxPagesView = 3;
+const PaginationComponent: React.FC<PaginationComponentProps> = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}) => {
+  const maxPagesView = 5;
   const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
   const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
 
@@ -29,7 +26,7 @@ const PaginationComponent = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage > 1) handlePageChange(currentPage - 1);
+              if (currentPage > 1) onPageChange(currentPage - 1);
             }}
             className={
               currentPage === 1 ? "pointer-events-none opacity-50" : ""
@@ -43,7 +40,7 @@ const PaginationComponent = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePageChange(1);
+                  onPageChange(1);
                 }}
               >
                 1
@@ -57,12 +54,12 @@ const PaginationComponent = () => {
           </>
         )}
         {Array.from({ length: endPage - startPage + 1 }).map((_, index) => (
-          <PaginationItem key={startPage + index}>
+          <PaginationItem key={`page-${startPage + index}`}>
             <PaginationLink
               href="#"
               onClick={(e) => {
                 e.preventDefault();
-                handlePageChange(startPage + index);
+                onPageChange(startPage + index);
               }}
               isActive={currentPage === startPage + index}
             >
@@ -82,7 +79,7 @@ const PaginationComponent = () => {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  handlePageChange(totalPages);
+                  onPageChange(totalPages);
                 }}
               >
                 {totalPages}
@@ -95,7 +92,7 @@ const PaginationComponent = () => {
             href="#"
             onClick={(e) => {
               e.preventDefault();
-              if (currentPage < totalPages) handlePageChange(currentPage + 1);
+              if (currentPage < totalPages) onPageChange(currentPage + 1);
             }}
             className={
               currentPage === totalPages ? "pointer-events-none opacity-50" : ""
