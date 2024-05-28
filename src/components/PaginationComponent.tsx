@@ -7,7 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { PaginationComponentProps } from "@/types";
+import type { PaginationComponentProps } from "@/types";
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
   currentPage,
@@ -54,7 +54,7 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
           </>
         )}
         {Array.from({ length: endPage - startPage + 1 }).map((_, index) => (
-          <PaginationItem key={startPage + index}>
+          <PaginationItem key={`page-${startPage + index}`}>
             <PaginationLink
               href="#"
               onClick={(e) => {
