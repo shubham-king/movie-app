@@ -4,6 +4,9 @@ module.exports = {
   extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
   ignorePatterns: ["dist", ".eslintrc.cjs"],
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: "./tsconfig.json",
+  },
   plugins: ["react-refresh"],
   rules: {
     "react-refresh/only-export-components": [
