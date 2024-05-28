@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { PaginationComponentProps } from "@/types";
 
 const PaginationComponent: React.FC<PaginationComponentProps> = ({
   currentPage,

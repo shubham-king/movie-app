@@ -5,9 +5,10 @@ import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import { useMovieDetails } from "@/hooks/useMovieDetails";
+import { DEFAULT_ID } from "@/api/const";
 
 const MoviePage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id = `${DEFAULT_ID}`} = useParams<{ id: string  }>();
   const { data: movie, isLoading, error } = useMovieDetails(id);
   const navigate = useNavigate();
 
