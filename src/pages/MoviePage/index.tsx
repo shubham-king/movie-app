@@ -6,7 +6,7 @@ import placeholderImage from "@/assets/placeholder.svg";
 import { MovieType } from "@/types";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
-const MovieDetails = () => {
+const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -134,4 +134,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default MoviePage;
