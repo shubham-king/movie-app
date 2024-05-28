@@ -3,11 +3,12 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CollapsibleTrigger, Collapsible } from "@/components/ui/collapsible";
 import placeholderImage from "@/assets/placeholder.svg";
-import { MovieType } from "@/types";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import { useMovieDetails } from "@/hooks/useMovieDetails";
 
 const MoviePage = () => {
   const { id } = useParams<{ id: string }>();
+  const { data: movie, isLoading, error } = useMovieDetails(id);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -18,15 +19,13 @@ const MoviePage = () => {
     return <LoadingOverlay />;
   }
 
-  if (error.show) {
-    return <div>Error: {error.msg}</div>;
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
-  if (!data || data.length === 0) {
+  if (!movie || movie.length === 0) {
     return <div>No movie details found</div>;
   }
-
-  const movie: MovieType = data[0];
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40 movie-details">

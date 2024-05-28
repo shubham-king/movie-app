@@ -15,24 +15,3 @@ export type MovieType = {
   Awards?: string;
   BoxOffice?: string;
 };
-
-export interface ErrorState {
-  show: boolean;
-  msg: string;
-}
-
-export interface State<T> {
-  isLoading: boolean;
-  error: ErrorState;
-  data: T | null;
-  query: string;
-  currentPage: number;
-  totalPages: number;
-}
-
-export interface MovieData {
-  data: MovieType[];
-  totalResults: number;
-  resultsPerPage: number;
-}
-

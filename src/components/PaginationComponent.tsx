@@ -1,4 +1,3 @@
-import { useAppContext } from "@/context/AppContext";
 import {
   Pagination,
   PaginationContent,
@@ -10,17 +9,15 @@ import {
 } from "@/components/ui/pagination";
 
 const PaginationComponent = () => {
-
-  const handlePageChange = (page: number) => {
-  };
+  const handlePageChange = (page: number) => {};
 
   const maxPagesView = 3;
-  const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
-  const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
+  // const startPage = Math.max(1, currentPage - Math.floor(maxPagesView / 2));
+  // const endPage = Math.min(totalPages, startPage + maxPagesView - 1);
 
   return (
     <Pagination>
-      <PaginationContent>
+      {/* <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
             href="#"
@@ -99,7 +96,7 @@ const PaginationComponent = () => {
             }
           />
         </PaginationItem>
-      </PaginationContent>
+      </PaginationContent> */}
     </Pagination>
   );
 };

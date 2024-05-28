@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useMovies } from "@/hooks/useMovies";
 import {
   Card,
   CardContent,
@@ -13,8 +15,11 @@ import PaginationComponent from "@/components/PaginationComponent";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function HomePage() {
+  const [query, setQuery] = useState("Batman");
+  const { data, error, isLoading } = useMovies(query, 1);
 
   const handleSearch = (searchQuery: string) => {
+    setQuery(searchQuery);
   };
 
   return (
@@ -41,7 +46,11 @@ export function HomePage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <MovieList />
+                  {error ? (
+                    <div>Error: {error.message}</div>
+                  ) : (
+                    <MovieList data={data?.data} />
+                  )}
                 </CardContent>
                 <CardFooter>
                   <PaginationComponent />
