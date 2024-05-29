@@ -25,7 +25,7 @@ This project has been refactored to enhance performance and maintainability. The
 - **React Query:** Replaced the use of Context API and useReducer with React Query for better state management and caching of API requests.
 - **Improved Error Handling:** Added checks to ensure robustness, particularly for API request handling.
 - **Pagination:** Implemented a pagination component to navigate through the movie list seamlessly.
-- **Code Quality:** Enhanced code readability and maintainability through refactoring by the  and adhering to best practices.
+- **Code Quality:** Enhanced code readability and maintainability through refactoring and adhering to best practices.
 - **Code Review:** Conducted code reviews using [@coderabbitai](https://github.com/coderabbitai), an AI-powered platform revolutionizing code reviews.
 
 ### Philosophy

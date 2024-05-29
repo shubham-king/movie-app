@@ -4,15 +4,15 @@ import { test, expect } from "@playwright/test";
 test.describe("Movie Details Page Tests", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:5173");
-    await page.fill('input[placeholder="Friends..."]', "barbie");
-    await page.waitForTimeout(5000);
+    await page.fill('input[placeholder="Search for movies..."]', "barbie");
+    await page.press('input[placeholder="Search for movies..."]', "Enter");
     await page.waitForSelector(".movie-item", { timeout: 20000 });
     await page.click(".movie-item:first-child a");
     await page.waitForSelector(".movie-details", { timeout: 20000 });
   });
 
   // Test for displaying movie details
-  test.skip("should display movie details", async ({ page }) => {
+  test("should display movie details", async ({ page }) => {
     const title = await page.locator(".movie-details h1").innerText();
     console.log(`Movie title: ${title}`);
     await expect(title).not.toBeNull();
@@ -27,12 +27,12 @@ test.describe("Movie Details Page Tests", () => {
   });
 
   // Test for back button functionality
-  test.skip("should navigate back to the previous page on clicking back button", async ({
+  test("should navigate back to the previous page on clicking back button", async ({
     page,
   }) => {
     await page.click('button:has-text("Back")');
-    await expect(page.locator('input[placeholder="Friends..."]')).toBeVisible({
-      timeout: 10000,
-    });
+    await expect(
+      page.locator('input[placeholder="Search for movies..."]')
+    ).toBeVisible();
   });
 });

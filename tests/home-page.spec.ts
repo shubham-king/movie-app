@@ -8,56 +8,19 @@ test.describe("HomePage Tests", () => {
   });
 
   // Test for displaying the homepage with search input
-  test.skip("should display the homepage with search input", async ({
-    page,
-  }) => {
-    await page.waitForTimeout(5000); // Wait additional time for the page to fully load
-
-    // Debugging: log the HTML content of the page
-    const content = await page.content();
-    console.log("Page content:", content);
-
-    // Debugging: check if the element exists
-    const searchBarExists = await page
-      .locator('input[placeholder="Friends..."]')
-      .count();
-    console.log(`Search bar count: ${searchBarExists}`);
-
-    if (searchBarExists === 0) {
-      throw new Error("Search bar not found in the DOM");
-    }
-
-    await expect(page.locator('input[placeholder="Friends..."]')).toBeVisible({
-      timeout: 10000,
-    });
+  test("should display the homepage with search input", async ({ page }) => {
+    await expect(
+      page.locator('input[placeholder="Search for movies..."]')
+    ).toBeVisible();
   });
 
   // Test for displaying movie results after searching
-  test.skip("should display movie results after searching", async ({
-    page,
-  }) => {
-    await page.waitForTimeout(5000); // Wait additional time for the page to fully load
-
-    // Debugging: log the HTML content of the page
-    const content = await page.content();
-    console.log("Page content:", content);
-
-    // Debugging: check if the element exists
-    const searchBarExists = await page
-      .locator('input[placeholder="Friends..."]')
-      .count();
-    console.log(`Search bar count: ${searchBarExists}`);
-
-    if (searchBarExists === 0) {
-      throw new Error("Search bar not found in the DOM");
-    }
-
-    await page.fill('input[placeholder="Friends..."]', "Batman");
-    await page.press('input[placeholder="Friends..."]', "Enter");
-    await page.waitForTimeout(5000); // Wait for the search results to load
-    await page.waitForSelector(".flex-col", { timeout: 20000 });
-    const movies = await page.$$(".flex-col");
-    console.log(`Movies found: ${movies.length}`);
-    expect(movies.length).toBeGreaterThan(0);
+  test("should display movie results after searching", async ({ page }) => {
+    await page.fill('input[placeholder="Search for movies..."]', "Batman");
+    await page.press('input[placeholder="Search for movies..."]', "Enter");
+    await page.waitForSelector(".movie-list", { timeout: 20000 }); // Assuming .movie-list is the class for movie results
+    const movieCount = await page.locator(".movie-list > div").count();
+    console.log(`Movies found: ${movieCount}`);
+    expect(movieCount).toBeGreaterThan(0);
   });
 });
