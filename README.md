@@ -38,4 +38,14 @@ This project has been refactored to enhance performance and maintainability. The
 
 - Node.js(v20.11.0) and pnpm
 
+### Screenshots
+
+<table>
+  <tr>
+    <td valign="top"><img src="src/assets/desktop_view.png" alt="Desktop View" style="max-width: 100%;"></td>
+    <td valign="top"><img src="src/assets/mobile_view.png" alt="Mobile View" style="max-width: 100%;"></td>
+  </tr>
+</table>
+
+
 🌎 Live demo: [Movie App](https://movie-app-omdb-lz.netlify.app/)
