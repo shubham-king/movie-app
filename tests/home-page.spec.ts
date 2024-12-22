@@ -16,7 +16,7 @@ test.describe("HomePage Tests", () => {
 
   // Test for displaying movie results after searching
   test("should display movie results after searching", async ({ page }) => {
-    await page.fill('input[placeholder="Search for movies..."]', "Batman");
+    await page.fill('input[placeholder="Search for movies..."]', "Marvel");
     await page.press('input[placeholder="Search for movies..."]', "Enter");
     await page.waitForSelector(".movie-list", { timeout: 20000 }); // Assuming .movie-list is the class for movie results
     const movieCount = await page.locator(".movie-list > div").count();

@@ -15,7 +15,7 @@ import PaginationComponent from "@/components/PaginationComponent";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
 export function HomePage() {
-  const [query, setQuery] = useState("Batman");
+  const [query, setQuery] = useState("Marvel");
   const [currentPage, setCurrentPage] = useState(1);
   const { data, error, isLoading } = useMovies(query, currentPage);
 
